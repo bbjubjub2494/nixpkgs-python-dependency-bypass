@@ -2,7 +2,7 @@
   description = "Description for the project";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/e8cca499a84e06147d5d990dd0ae20ae17b21c66";
+    nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -13,8 +13,13 @@
           pname = "test";
           version = "1";
           src = ./.;
+          format = "pyproject";
 
-          doCheck = false;
+          buildInputs = [
+            setuptools
+            setuptools_scm
+            pythonImportsCheckHook
+          ];
         };
       };
     };
